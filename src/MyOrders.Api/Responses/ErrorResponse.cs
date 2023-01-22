@@ -2,19 +2,18 @@
 {
 	public class ErrorResponse
 	{
-		public List<string> Messages { get; }
+		public string Message { get; }
+		public List<string> ValidationsErrorMessage { get; }
 
 		public ErrorResponse(string message)
 		{
-			Messages = new List<string>
-			{
-				message
-			};
+			Message = message;
 		}
 
-		public ErrorResponse(List<string> messages)
+		public ErrorResponse(string message, List<string> validationsErrorMessages)
 		{
-			Messages = messages;
+			Message = message;
+            ValidationsErrorMessage = validationsErrorMessages;
 		}
 	}
 }

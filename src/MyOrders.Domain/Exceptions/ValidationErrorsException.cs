@@ -5,15 +5,15 @@ namespace MyOrders.Domain.Exceptions
     [Serializable]
 	public class ValidationErrorsException : MyOrdersException
     {
-		public List<string>? ErrorMessages { get; }
+		public List<string>? ValidationsErrorMessages { get; }
 
         public ValidationErrorsException()
         {
         }
 
-        public ValidationErrorsException(List<string> errorMessages)
+        public ValidationErrorsException(string message, List<string> errorMessages) : base(message)
 		{
-			ErrorMessages = errorMessages;
+            ValidationsErrorMessages = errorMessages;
 		}
 
 

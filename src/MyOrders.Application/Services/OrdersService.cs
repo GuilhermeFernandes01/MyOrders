@@ -1,4 +1,5 @@
 ﻿using MyOrders.Domain.Persistence;
+using MyOrders.Domain.Models;
 
 namespace MyOrders.Application.Services
 {
@@ -11,15 +12,14 @@ namespace MyOrders.Application.Services
             _orderRepository = orderRepository;
         }
 
-        public async Task MarkOrderAsPaidAsync(int orderId)
+        public async Task<Order?> MarkOrderAsPaidAsync(int orderId)
         {
-            await _orderRepository.MarkOrderAsPaidAsync(orderId);
+            return await _orderRepository.MarkOrderAsPaidAsync(orderId);
         }
 
-        public async Task MarkOrderAsShippedAsync(int orderId)
+        public async Task<Order?> MarkOrderAsShippedAsync(int orderId)
         {
-            await _orderRepository.MarkOrderAsShippedAsync(orderId);
+            return await _orderRepository.MarkOrderAsShippedAsync(orderId);
         }
-
     }
 }

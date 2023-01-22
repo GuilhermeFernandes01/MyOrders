@@ -4,8 +4,14 @@ namespace MyOrders.Application.Orders.Outputs
 {
     public class GetAllOrdersResponse
     {
-        public int Total { get; set; }
+        public int Total { get; }
 
-        public IEnumerable<Order> Orders { get; set; } = new List<Order>();
+        public IEnumerable<Order> Orders { get; }
+
+        public GetAllOrdersResponse(int total, IEnumerable<Order> orders)
+        {
+            Total = total;
+            Orders = orders;
+        }
     }
 }

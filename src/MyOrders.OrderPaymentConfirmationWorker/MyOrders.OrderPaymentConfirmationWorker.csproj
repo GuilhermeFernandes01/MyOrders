@@ -22,7 +22,6 @@
     <None Remove="Microsoft.CodeQuality.Analyzers" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyOrders.Infrastructure\MyOrders.Infrastructure.csproj" />
     <ProjectReference Include="..\MyOrders.Application\MyOrders.Application.csproj" />
   </ItemGroup>
 </Project>

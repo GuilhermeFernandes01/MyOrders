@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using MyOrders.Application.Orders.Inputs;
+using MyOrders.Application.DTOs.Orders;
 using MyOrders.Application.Orders.Outputs;
+using MyOrders.Domain.Models;
 using MyOrders.Domain.Exceptions;
 using MyOrders.Domain.Persistence;
 
-namespace MyOrders.Application.UseCases.Order.GetById
+namespace MyOrders.Application.UseCases.Orders.GetById
 {
 	public class GetOrderByIdUseCase : IGetOrderByIdUseCase
     {
@@ -17,21 +18,20 @@ namespace MyOrders.Application.UseCases.Order.GetById
             _logger = logger;
         }
 
-        public async Task<GetOrderByIdResponse> Execute(GetOrderByIdRequest getOrderByIdRequest, CancellationToken cancellationToken)
+        public async Task<GetOrderByIdResponse> Execute(GetOrderByIdDTO getOrderByIdDTO, CancellationToken cancellationToken)
         {
-            var order = await _orderRepository.GetOrderByIdAsync(getOrderByIdRequest.OrderId, cancellationToken);
+            var order = await _orderRepository
+                .GetOrderByIdAsync(getOrderByIdDTO.OrderId, cancellationToken)
+                .ConfigureAwait(false);
 
             ValidateRequest(order);
 
-            var response = new GetOrderByIdResponse
-            {
-                Order = order
-            };
+            var response = new GetOrderByIdResponse(order!);
 
             return response;
         }
 
-        private void ValidateRequest(Domain.Models.Order? order)
+        private void ValidateRequest(Order? order)
         {
             if (order == null)
             {

@@ -8,7 +8,6 @@ namespace MyOrders.Api.Filters
 {
 	public class ExceptionFilter : IExceptionFilter
 	{
-
         private readonly ILogger<ExceptionFilter> _logger;
 
         public ExceptionFilter(ILogger<ExceptionFilter> logger)
@@ -20,7 +19,7 @@ namespace MyOrders.Api.Filters
         {
             _logger.LogError("ERROR: {error}", context);
 
-            switch (context.Exception)
+            switch (context?.Exception)
             {
                 case MyOrdersException:
                     HandleMyOrdersExceptions(context);
@@ -51,7 +50,7 @@ namespace MyOrders.Api.Filters
             var validationErrorException = context.Exception as ValidationErrorsException;
 
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            context.Result = new ObjectResult(new ErrorResponse(validationErrorException.ErrorMessages));
+            context.Result = new ObjectResult(new ErrorResponse("Malformed payload", validationErrorException.ValidationsErrorMessages));
         }
 
         private static void HandleNotFoundException(ExceptionContext context)

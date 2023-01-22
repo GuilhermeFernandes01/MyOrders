@@ -12,8 +12,8 @@ namespace MyOrders.Domain.Persistence
 
         Task<bool> CheckOrderIdExists(int orderId, CancellationToken cancellationToken);
 
-        Task MarkOrderAsPaidAsync(int orderId);
+        Task<Order?> MarkOrderAsPaidAsync(int orderId);
 
-        Task MarkOrderAsShippedAsync(int orderId);
+        Task<Order?> MarkOrderAsShippedAsync(int orderId);
     }
 }

@@ -1,49 +1,57 @@
 ﻿using FluentAssertions;
-using MyOrders.Application.UseCases.Order.Create;
+using MyOrders.Application.Validators.Orders;
 using Test.Utils.Requests;
 
-namespace Validators.Test.Orders.Create
+namespace Validators.Test.Orders.Create;
+
+public class CreateOrderValidatorTest
 {
-    public class CreateOrderValidatorTest
+    [Fact(DisplayName = "GIVEN a valid validator WHEN there is a valid product THEN it should return success")]
+    public void ValidateSuccess()
     {
-        [Fact]
-        public void ValidateSuccess()
-        {
-            var validator = new CreateOrderValidator();
+        // Arrange
+        var validator = new CreateOrderValidator();
 
-            var request = CreateOrderRequestBuilder.Build();
+        var request = CreateOrderRequestBuilder.Build();
 
-            var result = validator.Validate(request);
+        // Act
+        var result = validator.Validate(request);
 
-            result.IsValid.Should().BeTrue();
-        }
+        // Assert
+        result.IsValid.Should().BeTrue();
+    }
 
-        [Fact]
-        public void ValidateEmptyProductName()
-        {
-            var validator = new CreateOrderValidator();
+    [Fact(DisplayName = "GIVEN a valid validator WHEN product name is empty THEN it should return an error")]
+    public void ValidateEmptyProductName()
+    {
+        // Arrange
+        var validator = new CreateOrderValidator();
 
-            var request = CreateOrderRequestBuilder.Build();
-            request.ProductName = string.Empty;
+        var request = CreateOrderRequestBuilder.Build();
+        request.ProductName = string.Empty;
 
-            var result = validator.Validate(request);
+        // Act
+        var result = validator.Validate(request);
 
-            result.IsValid.Should().BeFalse();
-            result.Errors.Should().ContainSingle().And.Contain(error => error.ErrorMessage.Equals("'Product Name' must not be empty."));
-        }
+        // Assert
+        result.IsValid.Should().BeFalse();
+        result.Errors.Should().ContainSingle().And.Contain(error => error.ErrorMessage.Equals("'Product Name' must not be empty."));
+    }
 
-        [Fact]
-        public void ValidateQuantityLessThanOne()
-        {
-            var validator = new CreateOrderValidator();
+    [Fact(DisplayName = "GIVEN a valid validator WHEN quantity is less than one THEN it should return an error")]
+    public void ValidateQuantityLessThanOne()
+    {
+        // Arrange
+        var validator = new CreateOrderValidator();
 
-            var request = CreateOrderRequestBuilder.Build();
-            request.Quantity = 0;
+        var request = CreateOrderRequestBuilder.Build();
+        request.Quantity = 0;
 
-            var result = validator.Validate(request);
+        // Act
+        var result = validator.Validate(request);
 
-            result.IsValid.Should().BeFalse();
-            result.Errors.Should().ContainSingle().And.Contain(error => error.ErrorMessage.Equals("'Quantity' must be greater than '0'."));
-        }
+        // Assert
+        result.IsValid.Should().BeFalse();
+        result.Errors.Should().ContainSingle().And.Contain(error => error.ErrorMessage.Equals("'Quantity' must be greater than '0'."));
     }
 }

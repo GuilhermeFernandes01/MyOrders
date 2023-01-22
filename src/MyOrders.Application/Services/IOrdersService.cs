@@ -1,9 +1,10 @@
-﻿namespace MyOrders.Application.Services
-{
-    public interface IOrdersService
-    {
-        Task MarkOrderAsPaidAsync(int orderId);
+﻿using MyOrders.Domain.Models;
 
-        Task MarkOrderAsShippedAsync(int orderId);
-    }
+namespace MyOrders.Application.Services;
+
+public interface IOrdersService
+{
+    Task<Order?> MarkOrderAsPaidAsync(int orderId);
+
+    Task<Order?> MarkOrderAsShippedAsync(int orderId);
 }

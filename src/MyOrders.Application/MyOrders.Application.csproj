@@ -27,28 +27,24 @@
     <None Remove="Microsoft.Extensions.Configuration.Abstractions" />
     <None Remove="MassTransit" />
     <None Remove="UseCases\" />
-    <None Remove="UseCases\Order\" />
-    <None Remove="UseCases\Order\Create\" />
     <None Remove="FluentValidation" />
     <None Remove="Microsoft.CodeQuality.Analyzers" />
-    <None Remove="UseCases\Order\GetById\" />
-    <None Remove="UseCases\Order\GetAll\" />
-    <None Remove="UseCases\Order\UpdateById\" />
     <None Remove="Inputs\" />
     <None Remove="Outputs\" />
     <None Remove="Inputs\Orders\" />
     <None Remove="Outputs\Orders\" />
+    <None Remove="DTOs\" />
+    <None Remove="DTOs\Orders\" />
+    <None Remove="Validators\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UseCases\" />
-    <Folder Include="UseCases\Order\" />
-    <Folder Include="UseCases\Order\Create\" />
-    <Folder Include="UseCases\Order\GetById\" />
-    <Folder Include="UseCases\Order\GetAll\" />
-    <Folder Include="UseCases\Order\UpdateById\" />
     <Folder Include="Inputs\" />
     <Folder Include="Outputs\" />
     <Folder Include="Inputs\Orders\" />
     <Folder Include="Outputs\Orders\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\Orders\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
 </Project>

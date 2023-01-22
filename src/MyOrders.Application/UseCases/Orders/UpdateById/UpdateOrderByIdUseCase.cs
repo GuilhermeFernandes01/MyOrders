@@ -6,8 +6,10 @@ using MyOrders.Application.Orders.Inputs;
 using MyOrders.Domain.Exceptions;
 using MyOrders.Domain.Persistence;
 using MyOrders.Domain.Contracts;
+using MyOrders.Application.DTOs.Orders;
+using MyOrders.Application.Outputs.Orders;
 
-namespace MyOrders.Application.UseCases.Order.UpdateById
+namespace MyOrders.Application.UseCases.Orders.UpdateById
 {
 	public class UpdateOrderByIdUseCase : IUpdateOrderByIdUseCase
     {
@@ -25,21 +27,22 @@ namespace MyOrders.Application.UseCases.Order.UpdateById
             _logger = logger;
         }
 
-		public async Task Execute(UpdateOrderStatusByIdRequest updateOrderStatusByIdRequest, CancellationToken cancellationToken)
+		public async Task<UpdateOrderByIdResponse?> Execute(UpdateOrderStatusByIdDTO updateOrderStatusByIdDTO, CancellationToken cancellationToken)
 		{
-            var orderExists = await _orderRepository.CheckOrderIdExists(updateOrderStatusByIdRequest.OrderId, cancellationToken);
+            var orderExists = await _orderRepository
+                .CheckOrderIdExists(updateOrderStatusByIdDTO.OrderId, cancellationToken)
+                .ConfigureAwait(false);
 
             ValidateRequest(orderExists);
 
-            var orderToBeSent = new OrderPaymentConfirmedMessage
-            {
-                OrderId = updateOrderStatusByIdRequest.OrderId
-            };
+            var orderToBeSent = new OrderPaymentConfirmedMessage(updateOrderStatusByIdDTO.OrderId);
 
             await _bus.Publish(orderToBeSent, cancellationToken);
+
+            return null;
         }
 
-		private void ValidateRequest(bool orderExists)
+        private void ValidateRequest(bool orderExists)
         {
             if (!orderExists)
             {

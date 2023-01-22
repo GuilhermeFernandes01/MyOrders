@@ -4,6 +4,11 @@ namespace MyOrders.Application.Orders.Outputs
 {
 	public class GetOrderByIdResponse
 	{
-		public Order Order { get; set; }
+		public Order Order { get; }
+
+		public GetOrderByIdResponse(Order order)
+		{
+			Order = order;
+		}
     }
 }

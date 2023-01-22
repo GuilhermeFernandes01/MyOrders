@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyOrders.Api.Responses;
+using MyOrders.Api.Filters;
+using MyOrders.Application.DTOs.Orders;
 using MyOrders.Application.Orders.Inputs;
 using MyOrders.Application.Orders.Outputs;
-using MyOrders.Application.UseCases.Order.Create;
-using MyOrders.Application.UseCases.Order.GetById;
-using MyOrders.Application.UseCases.Order.GetAll;
-using MyOrders.Application.UseCases.Order.UpdateById;
+using MyOrders.Application.UseCases.Orders.Create;
+using MyOrders.Application.UseCases.Orders.GetById;
+using MyOrders.Application.UseCases.Orders.GetAll;
+using MyOrders.Application.UseCases.Orders.UpdateById;
 
 namespace MyOrders.Api.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 [ApiController]
 public class OrdersController : ControllerBase
 {
@@ -21,6 +23,7 @@ public class OrdersController : ControllerBase
     }
 
     [HttpPost]
+    [OrderControllerFilter]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
@@ -31,7 +34,11 @@ public class OrdersController : ControllerBase
     {
         _logger.LogInformation("REQUEST: Create order request received {request}", createOrderRequest);
 
-        var orderId = await useCase.Execute(createOrderRequest, cancellationToken);
+        var orderDTO = new CreateOrderDTO(createOrderRequest.ProductName, createOrderRequest.Quantity);
+
+        _logger.LogInformation("INFO: Object mapped {object}", orderDTO);
+
+        var orderId = await useCase.Execute(orderDTO, cancellationToken).ConfigureAwait(false);
 
         var responseUri = new Uri($"{Request.Scheme}://{Request.Host}{Request.PathBase}/Orders/{orderId}/");
 
@@ -41,13 +48,6 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet]
-    /*
-     * Eu não utilizaria "orderId", pois já estamos no contexto de order e /orders/{id}
-     * já seria suficiente para entender que estamos buscando uma order por seu id.
-     * No banco de dados também modificaria de "orderId" para "id".
-     * Usar "orderId" neste caso é redundante, tornando-se questionável se a rota segue
-     * o padrão REST por não aproveitar de sua estrutura hierárquica.
-     */
     [Route("{OrderId}")]
     [ProducesResponseType(typeof(GetOrderByIdResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
@@ -59,7 +59,11 @@ public class OrdersController : ControllerBase
     {
         _logger.LogInformation("REQUEST: Get order by id request received {request}", getOrderByIdRequest);
 
-        var response = await useCase.Execute(getOrderByIdRequest, cancellationToken);
+        var getOrderDTO = new GetOrderByIdDTO(getOrderByIdRequest.OrderId);
+
+        _logger.LogInformation("INFO: Object mapped {object}", getOrderDTO);
+
+        var response = await useCase.Execute(getOrderDTO, cancellationToken).ConfigureAwait(false);
 
         _logger.LogInformation("RESPONSE: Order returned successfully {response}", response);
 
@@ -76,7 +80,7 @@ public class OrdersController : ControllerBase
     {
         _logger.LogInformation("REQUEST: Get orders request received");
 
-        var response = await useCase.Execute(cancellationToken);
+        var response = await useCase.Execute(cancellationToken).ConfigureAwait(false);
 
         _logger.LogInformation("RESPONSE: Orders returned successfully {response}", response);
 
@@ -94,7 +98,11 @@ public class OrdersController : ControllerBase
     {
         _logger.LogInformation("REQUEST: Update order by id request received {request}", updateOrderStatusByIdRequest);
 
-        await useCase.Execute(updateOrderStatusByIdRequest, cancellationToken);
+        var request = new UpdateOrderStatusByIdDTO(updateOrderStatusByIdRequest.OrderId);
+
+        _logger.LogInformation("INFO: Object mapped {object}", request);
+
+        await useCase.Execute(request, cancellationToken).ConfigureAwait(false);
 
         _logger.LogInformation("RESPONSE: Message published successfully");
 

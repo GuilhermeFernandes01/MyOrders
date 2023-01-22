@@ -1,16 +1,11 @@
-namespace MyOrders.Domain.Contracts
+namespace MyOrders.Domain.Contracts;
+
+public class OrderPaymentConfirmedMessage
 {
-    public class OrderPaymentConfirmedMessage
+    public int OrderId { get; }
+
+    public OrderPaymentConfirmedMessage(int orderId)
     {
-        public OrderPaymentConfirmedMessage()
-        {
-        }
-
-        public OrderPaymentConfirmedMessage(int orderId)
-        {
-            OrderId = orderId;
-        }
-
-        public int OrderId { get; set; }
+        OrderId = orderId;
     }
 }
