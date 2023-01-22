@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MyOrders.OrderProcessingWorker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

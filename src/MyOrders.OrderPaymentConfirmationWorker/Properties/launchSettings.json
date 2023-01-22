@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MyOrders.OrderPaymentConfirmationWorker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

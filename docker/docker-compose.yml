@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+    sqlserver:
+        # https://database.guide/how-to-install-sql-server-on-an-m1-mac-arm64/
+        image: mcr.microsoft.com/azure-sql-edge
+        ports:
+            - "3333:1433"
+        environment:
+            ACCEPT_EULA: "Y"
+            SA_PASSWORD: "Admin@1234"
+
+    rabbitmq:
+        image: masstransit/rabbitmq:latest
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+        environment:
+            RABBITMQ_DEFAULT_USER: guest
+            RABBITMQ_DEFAULT_PASS: guest
