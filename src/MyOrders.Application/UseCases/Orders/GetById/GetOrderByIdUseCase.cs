@@ -23,6 +23,8 @@ namespace MyOrders.Application.UseCases.Orders.GetById
             var order = await _orderRepository
                 .GetOrderByIdAsync(GetOrderByIdDto.OrderId, cancellationToken)
                 .ConfigureAwait(false);
+            
+            _logger.LogInformation("DB_RESPONSE: {orders}", order);
 
             ValidateRequest(order);
 

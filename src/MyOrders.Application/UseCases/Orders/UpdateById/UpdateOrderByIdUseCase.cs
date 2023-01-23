@@ -32,12 +32,16 @@ namespace MyOrders.Application.UseCases.Orders.UpdateById
             var orderExists = await _orderRepository
                 .CheckOrderIdExists(UpdateOrderStatusByIdDto.OrderId, cancellationToken)
                 .ConfigureAwait(false);
+            
+            _logger.LogInformation("DB_RESPONSE: {orderExists}", orderExists);
 
             ValidateRequest(orderExists);
 
             var orderToBeSent = new OrderPaymentConfirmedMessage(UpdateOrderStatusByIdDto.OrderId);
 
             await _bus.Publish(orderToBeSent, cancellationToken);
+            
+            _logger.LogInformation("INFO: Message published {orderToBeSent}", orderToBeSent);
 
             return null;
         }

@@ -18,7 +18,9 @@ public class GetOrdersUseCase : IGetOrdersUseCase
     public async Task<GetAllOrdersResponse> Execute(CancellationToken cancellationToken)
     {
         var orders = await _orderRepository.GetOrdersAsync(cancellationToken).ConfigureAwait(false);
-
+        
+        _logger.LogInformation("DB_RESPONSE: {orders}", orders);
+        
         var response = new GetAllOrdersResponse(orders.Count(), orders);
 
         return response;
