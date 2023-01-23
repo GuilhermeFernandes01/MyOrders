@@ -22,8 +22,8 @@ public class LoggerBuilder<T>
         return _instance;
     }
 
-    public ILogger<T> Build()
+    public Mock<ILogger<T>> Build()
     {
-        return _logger.Object;
+        return _logger;
     }
 }

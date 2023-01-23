@@ -7,21 +7,27 @@ namespace Test.Utils.Models;
 
 public static class OrderBuilder
 {
-	public static Order Build()
+	public static Order? Build(
+        int? orderId = default,
+        string? productName = default,
+        int? quantity = default,
+        bool? paid = default,
+        bool? shipped = default
+        )
 	{
-        var orderId = new Faker().Random.Int(1, 10000);
-        var productName = new Faker().Commerce.ProductName();
-        var quantity = new Faker().Random.Int(1, 100);
-        var paid = false;
-        var shipped = false;
+        orderId ??= new Faker().Random.Int(1, 10000);
+        productName ??= new Faker().Commerce.ProductName();
+        quantity ??= new Faker().Random.Int(1, 100);
+        paid ??= false;
+        shipped ??= false;
 
         return new Order
         {
-            OrderId = orderId,
+            OrderId = orderId.Value,
             ProductName = productName,
-            Quantity = quantity,
-            Paid = paid,
-            Shipped = shipped
+            Quantity = quantity.Value,
+            Paid = paid.Value,
+            Shipped = shipped.Value
         };
     }
 }

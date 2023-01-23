@@ -6,6 +6,8 @@ public class GetOrderByIdDto
 
     public GetOrderByIdDto(int? orderId)
     {
-        OrderId = orderId.HasValue && orderId.Value > 0 ? orderId.Value : throw new ArgumentNullException(nameof(orderId));
+        OrderId = orderId.HasValue && orderId.Value > 0
+            ? orderId.Value
+            : throw new ArgumentNullException(nameof(orderId));
     }
 }

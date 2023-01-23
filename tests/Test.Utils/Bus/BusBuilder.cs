@@ -24,8 +24,8 @@ public class BusBuilder
         return _instance;
     }
 
-    public IBus Build()
+    public Mock<IBus> Build()
     {
-        return _bus.Object;
+        return _bus;
     }
 }
