@@ -23,9 +23,21 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="FluentAssertions" Version="6.9.0" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="coverlet.msbuild" />
+    <None Remove="Orders\" />
+    <None Remove="Orders\Create\" />
+    <None Remove="FluentAssertions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Orders\" />
+    <Folder Include="Orders\Create\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Test.Utils\Test.Utils.csproj" />
+    <ProjectReference Include="..\..\src\MyOrders.Application\MyOrders.Application.csproj" />
   </ItemGroup>
 </Project>

@@ -9,12 +9,22 @@
   <ItemGroup>
     <None Remove="Requests\" />
     <None Remove="Bogus" />
+    <None Remove="Repositories\" />
+    <None Remove="Moq" />
+    <None Remove="Logger\" />
+    <None Remove="DTOs\" />
+    <None Remove="DTOs\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Requests\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Logger\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.2" />
+    <PackageReference Include="Moq" Version="4.18.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\MyOrders.Application\MyOrders.Application.csproj" />

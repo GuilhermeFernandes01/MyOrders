@@ -30,7 +30,7 @@ namespace MyOrders.Application.UseCases.Orders.Create
 				Shipped = false
 			};
 
-			await _orderRepository.AddOrUpdateAsync(order, cancellationToken).ConfigureAwait(false);
+			await _orderRepository.AddAsync(order, cancellationToken).ConfigureAwait(false);
 
 			_logger.LogInformation("INFO: Order created sucessfully {order}", order);
 
@@ -38,6 +38,6 @@ namespace MyOrders.Application.UseCases.Orders.Create
 
 			return response;
         }
-	}
+    }
 }
 

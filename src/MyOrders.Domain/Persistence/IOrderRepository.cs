@@ -4,7 +4,7 @@ namespace MyOrders.Domain.Persistence
 {
     public interface IOrderRepository
     {
-        Task<int> AddOrUpdateAsync(Order order, CancellationToken cancellationToken);
+        Task AddAsync(Order order, CancellationToken cancellationToken);
 
         Task<Order?> GetOrderByIdAsync(int orderId, CancellationToken cancellationToken);
 

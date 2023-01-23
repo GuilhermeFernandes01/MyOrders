@@ -14,12 +14,10 @@ public class OrderRepository : IOrderRepository
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<int> AddOrUpdateAsync(Order order, CancellationToken cancellationToken)
+    public async Task AddAsync(Order order, CancellationToken cancellationToken)
     {
         await _dbContext.Orders.AddAsync(order, cancellationToken).ConfigureAwait(false);
         await _unitOfWork.SaveEntitiesAsync(cancellationToken).ConfigureAwait(false);
-
-        return order.OrderId;
     }
 
     public async Task<Order?> GetOrderByIdAsync(int orderId, CancellationToken cancellationToken)
