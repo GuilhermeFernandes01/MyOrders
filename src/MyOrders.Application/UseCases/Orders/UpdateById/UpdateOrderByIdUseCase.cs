@@ -39,7 +39,7 @@ namespace MyOrders.Application.UseCases.Orders.UpdateById
 
             var orderToBeSent = new OrderPaymentConfirmedMessage(UpdateOrderStatusByIdDto.OrderId);
 
-            await _bus.Publish(orderToBeSent, cancellationToken);
+            await _bus.Publish(orderToBeSent, cancellationToken).ConfigureAwait(false);
             
             _logger.LogInformation("INFO: Message published {orderToBeSent}", orderToBeSent);
 

@@ -11,16 +11,13 @@ namespace MyOrders.Application.UseCases.Orders.Create
     {
 		private readonly IOrderRepository _orderRepository;
 		private readonly ILogger<CreateOrderUseCase> _logger;
-		private readonly IUnitOfWork _unitOfWork;
 
         public CreateOrderUseCase(
 			IOrderRepository orderRepository,
-			ILogger<CreateOrderUseCase> logger,
-			IUnitOfWork unitOfWork)
+			ILogger<CreateOrderUseCase> logger)
 		{
 			_orderRepository = orderRepository;
 			_logger = logger;
-			_unitOfWork = unitOfWork;
         }
 
 		public async Task<CreateOrderResponse> Execute(CreateOrderDto CreateOrderDto, CancellationToken cancellationToken)

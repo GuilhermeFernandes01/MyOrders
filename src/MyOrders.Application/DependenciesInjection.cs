@@ -12,14 +12,11 @@ using MyOrders.Infrastructure.Repositories;
 
 namespace MyOrders.Application;
 
-public static class DependencyInjection
+public static class DependenciesInjection
 {
-    private static IConfiguration _configuration;
-
-		public static IServiceCollection InjectDependencies(this IServiceCollection services, IConfiguration configuration)
-		{
-        _configuration = configuration;
-        var connectionString = _configuration.GetSection("SqlServerSettings:ConnectionString").Value;
+	public static IServiceCollection InjectDependencies(this IServiceCollection services, IConfiguration configuration)
+	{
+        var connectionString = configuration.GetSection("SqlServerSettings:ConnectionString").Value;
 
         services.AddDbContext<MyOrdersDbContext>(optionsAction: options =>
             options.UseSqlServer(connectionString));
@@ -29,7 +26,7 @@ public static class DependencyInjection
         AddUseCases(services);
 
         return services;
-		}
+	}
 
     private static void AddUseCases(IServiceCollection services)
     {
@@ -46,10 +43,9 @@ public static class DependencyInjection
         Action<IRabbitMqBusFactoryConfigurator>? rabbitConfig = null
     )
     {
-        _configuration = configuration;
-        var rabbitHost = _configuration.GetSection("RabbitMqSettings:Host").Value;
-        var rabbitUsername = _configuration.GetSection("RabbitMqSettings:Username").Value;
-        var rabbitPassword = _configuration.GetSection("RabbitMqSettings:Password").Value;
+        var rabbitHost = configuration.GetSection("RabbitMqSettings:Host").Value;
+        var rabbitUsername = configuration.GetSection("RabbitMqSettings:Username").Value;
+        var rabbitPassword = configuration.GetSection("RabbitMqSettings:Password").Value;
 
         services.AddMassTransit(x =>
         {

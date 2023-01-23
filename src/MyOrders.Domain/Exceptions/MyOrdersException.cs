@@ -1,24 +1,23 @@
 ﻿using System.Runtime.Serialization;
 
-namespace MyOrders.Domain.Exceptions
-{
-    [Serializable]
-    public class MyOrdersException : SystemException
-	{
-        public MyOrdersException()
-        {
-        }
+namespace MyOrders.Domain.Exceptions;
 
-        public MyOrdersException(string message) : base(message)
+[Serializable]
+public class MyOrdersException : SystemException
+	{
+    public MyOrdersException()
+    {
+    }
+
+    public MyOrdersException(string message) : base(message)
 		{
 		}
 
-        public MyOrdersException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+    public MyOrdersException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 
-        protected MyOrdersException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+    protected MyOrdersException(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
     }
 }

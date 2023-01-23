@@ -14,12 +14,16 @@ namespace MyOrders.Application.Services
 
         public async Task<Order?> MarkOrderAsPaidAsync(int orderId)
         {
-            return await _orderRepository.MarkOrderAsPaidAsync(orderId);
+            return await _orderRepository
+                .MarkOrderAsPaidAsync(orderId)
+                .ConfigureAwait(false);
         }
 
         public async Task<Order?> MarkOrderAsShippedAsync(int orderId)
         {
-            return await _orderRepository.MarkOrderAsShippedAsync(orderId);
+            return await _orderRepository
+                .MarkOrderAsShippedAsync(orderId)
+                .ConfigureAwait(false);
         }
     }
 }

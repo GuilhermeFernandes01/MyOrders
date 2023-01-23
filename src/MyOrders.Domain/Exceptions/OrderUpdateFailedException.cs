@@ -1,6 +1,8 @@
-﻿using System;
+﻿using System.Runtime.Serialization;
+
 namespace MyOrders.Domain.Exceptions;
 
+[Serializable]
 public class OrderUpdateFailedException : MyOrdersException
 {
 	public OrderUpdateFailedException() : base("ERROR: Order didn't update")
@@ -14,5 +16,8 @@ public class OrderUpdateFailedException : MyOrdersException
     public OrderUpdateFailedException(string message, Exception innerException) : base(message, innerException)
     {
     }
-}
 
+    protected OrderUpdateFailedException(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+    }
+}

@@ -1,25 +1,23 @@
 ﻿using System.Runtime.Serialization;
 
-namespace MyOrders.Domain.Exceptions
+namespace MyOrders.Domain.Exceptions;
+
+[Serializable]
+public class NotFoundException : MyOrdersException
 {
-    [Serializable]
-    public class NotFoundException : MyOrdersException
+    public NotFoundException()
+	{
+	}
+
+    public NotFoundException(string message) : base(message)
     {
-        public NotFoundException()
-		{
-		}
+    }
 
-        public NotFoundException(string message) : base(message)
-        {
-        }
+    public NotFoundException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 
-        public NotFoundException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        protected NotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+    protected NotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
     }
 }
-

@@ -4,7 +4,7 @@ using MyOrders.Application.Orders.Inputs;
 
 namespace Test.Utils.Requests;
 
-public class CreateOrderRequestBuilder
+public static class CreateOrderRequestBuilder
 {
 	public static CreateOrderRequest Build()
 	{

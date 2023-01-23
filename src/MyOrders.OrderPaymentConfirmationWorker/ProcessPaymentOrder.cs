@@ -37,7 +37,7 @@ public class ProcessPaymentOrder : IConsumer<OrderPaymentConfirmedMessage>
 
             var messageToBeSent = new ProcessOrderMessage(context.Message.OrderId);
 
-            await _bus.Publish(messageToBeSent);
+            await _bus.Publish(messageToBeSent).ConfigureAwait(false);
 
             _logger.LogInformation("SUCCESS: Message sent successfully {message}", JsonSerializer.Serialize(messageToBeSent));
         } catch (Exception ex)
