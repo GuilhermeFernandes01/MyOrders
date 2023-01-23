@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
-using MyOrders.Application.Orders.Outputs;
+using MyOrders.Application.Outputs.Orders;
 using MyOrders.Application.UseCases.Orders.GetById;
 using MyOrders.Domain.Exceptions;
 using Test.Utils.DTOs.Orders;

@@ -1,4 +1,4 @@
-﻿using MyOrders.Application.Orders.Outputs;
+﻿using MyOrders.Application.Outputs.Orders;
 
 namespace MyOrders.Application.UseCases.Orders.GetAll;
 

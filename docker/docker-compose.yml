@@ -2,8 +2,9 @@ version: '3.4'
 
 services:
     sqlserver:
-        # https://database.guide/how-to-install-sql-server-on-an-m1-mac-arm64/
-        image: mcr.microsoft.com/azure-sql-edge
+        # Eu usei esse para desenvolver: mcr.microsoft.com/azure-sql-edge
+        # Por conta disso: https://database.guide/how-to-install-sql-server-on-an-m1-mac-arm64/
+        image: mcr.microsoft.com/mssql/server:2019-latest
         ports:
             - "3333:1433"
         environment:

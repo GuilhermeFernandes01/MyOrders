@@ -2,7 +2,7 @@
 using MassTransit.Transports;
 using System.Net;
 using Microsoft.Extensions.Logging;
-using MyOrders.Application.Orders.Inputs;
+using MyOrders.Application.Inputs.Orders;
 using MyOrders.Domain.Exceptions;
 using MyOrders.Domain.Persistence;
 using MyOrders.Domain.Contracts;

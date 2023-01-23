@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MyOrders.Application.Validators.Orders;
-using MyOrders.Application.Orders.Inputs;
+using MyOrders.Application.Inputs.Orders;
 using MyOrders.Domain.Exceptions;
 using Microsoft.Extensions.Logging;
 using MyOrders.Api.Controllers;

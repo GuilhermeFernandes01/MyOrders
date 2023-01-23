@@ -1,5 +1,5 @@
 ﻿using MyOrders.Application.DTOs.Orders;
-using MyOrders.Application.Orders.Outputs;
+using MyOrders.Application.Outputs.Orders;
 
 namespace MyOrders.Application.UseCases.Orders.GetById;
 

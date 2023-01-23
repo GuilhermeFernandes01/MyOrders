@@ -2,8 +2,8 @@
 using MyOrders.Api.Responses;
 using MyOrders.Api.Filters;
 using MyOrders.Application.DTOs.Orders;
-using MyOrders.Application.Orders.Inputs;
-using MyOrders.Application.Orders.Outputs;
+using MyOrders.Application.Inputs.Orders;
+using MyOrders.Application.Outputs.Orders;
 using MyOrders.Application.UseCases.Orders.Create;
 using MyOrders.Application.UseCases.Orders.GetById;
 using MyOrders.Application.UseCases.Orders.GetAll;
@@ -38,9 +38,9 @@ public class OrdersController : ControllerBase
 
         _logger.LogInformation("INFO: Object mapped {object}", orderDTO);
 
-        var orderId = await useCase.Execute(orderDTO, cancellationToken).ConfigureAwait(false);
+        var orderCreated = await useCase.Execute(orderDTO, cancellationToken).ConfigureAwait(false);
 
-        var responseUri = new Uri($"{Request.Scheme}://{Request.Host}{Request.PathBase}/Orders/{orderId}/");
+        var responseUri = new Uri($"{Request.Scheme}://{Request.Host}{Request.PathBase}/Orders/{orderCreated.OrderId}/");
 
         _logger.LogInformation("RESPONSE: Order created successfully {response}", responseUri);
 

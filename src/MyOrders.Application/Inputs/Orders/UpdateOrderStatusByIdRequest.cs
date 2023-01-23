@@ -1,4 +1,4 @@
-﻿namespace MyOrders.Application.Orders.Inputs
+﻿namespace MyOrders.Application.Inputs.Orders
 {
 	public class UpdateOrderStatusByIdRequest
 	{

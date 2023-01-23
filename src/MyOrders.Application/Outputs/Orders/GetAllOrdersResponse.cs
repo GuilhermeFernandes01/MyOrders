@@ -1,6 +1,6 @@
 ﻿using MyOrders.Domain.Models;
 
-namespace MyOrders.Application.Orders.Outputs
+namespace MyOrders.Application.Outputs.Orders
 {
     public class GetAllOrdersResponse
     {

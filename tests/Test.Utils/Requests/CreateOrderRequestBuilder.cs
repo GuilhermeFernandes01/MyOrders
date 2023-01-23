@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using Bogus.DataSets;
-using MyOrders.Application.Orders.Inputs;
+using MyOrders.Application.Inputs.Orders;
 
 namespace Test.Utils.Requests;
 

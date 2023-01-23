@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using MyOrders.Application.Orders.Inputs;
+using MyOrders.Application.Inputs.Orders;
 
 namespace MyOrders.Application.Validators.Orders;
 

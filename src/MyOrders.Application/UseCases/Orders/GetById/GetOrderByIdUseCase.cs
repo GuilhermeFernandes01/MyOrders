@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using MyOrders.Application.DTOs.Orders;
-using MyOrders.Application.Orders.Outputs;
+using MyOrders.Application.Outputs.Orders;
 using MyOrders.Domain.Models;
 using MyOrders.Domain.Exceptions;
 using MyOrders.Domain.Persistence;

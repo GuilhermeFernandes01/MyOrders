@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using MyOrders.Application.Orders.Outputs;
+using MyOrders.Application.Outputs.Orders;
 using MyOrders.Domain.Persistence;
 
 namespace MyOrders.Application.UseCases.Orders.GetAll;
