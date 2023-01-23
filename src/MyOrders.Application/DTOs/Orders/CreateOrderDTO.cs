@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+﻿namespace MyOrders.Application.DTOs.Orders;
 
 public class CreateOrderDto
 {
