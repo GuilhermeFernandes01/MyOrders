@@ -1,10 +1,10 @@
 ﻿namespace MyOrders.Application.DTOs.Orders;
 
-public class UpdateOrderStatusByIdDTO
+public class UpdateOrderStatusByIdDto
 {
 	public int OrderId { get; }
 
-	public UpdateOrderStatusByIdDTO(int? orderId)
+	public UpdateOrderStatusByIdDto(int? orderId)
 	{
 		OrderId = orderId.HasValue && orderId.Value > 0 ? orderId.Value : throw new ArgumentNullException(nameof(orderId));
 	}

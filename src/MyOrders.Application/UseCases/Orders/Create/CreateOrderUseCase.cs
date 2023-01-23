@@ -16,12 +16,12 @@ namespace MyOrders.Application.UseCases.Orders.Create
 			_unitOfWork = unitOfWork;
         }
 
-		public async Task<CreateOrderResponse> Execute(CreateOrderDTO createOrderDTO, CancellationToken cancellationToken)
+		public async Task<CreateOrderResponse> Execute(CreateOrderDto CreateOrderDto, CancellationToken cancellationToken)
 		{
 			var order = new Order
 			{
-				ProductName = createOrderDTO.ProductName,
-				Quantity = createOrderDTO.Quantity,
+				ProductName = CreateOrderDto.ProductName,
+				Quantity = CreateOrderDto.Quantity,
 				Paid = false,
 				Shipped = false
 			};

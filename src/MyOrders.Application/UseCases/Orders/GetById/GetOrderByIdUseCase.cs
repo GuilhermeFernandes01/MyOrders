@@ -18,10 +18,10 @@ namespace MyOrders.Application.UseCases.Orders.GetById
             _logger = logger;
         }
 
-        public async Task<GetOrderByIdResponse> Execute(GetOrderByIdDTO getOrderByIdDTO, CancellationToken cancellationToken)
+        public async Task<GetOrderByIdResponse> Execute(GetOrderByIdDto GetOrderByIdDto, CancellationToken cancellationToken)
         {
             var order = await _orderRepository
-                .GetOrderByIdAsync(getOrderByIdDTO.OrderId, cancellationToken)
+                .GetOrderByIdAsync(GetOrderByIdDto.OrderId, cancellationToken)
                 .ConfigureAwait(false);
 
             ValidateRequest(order);

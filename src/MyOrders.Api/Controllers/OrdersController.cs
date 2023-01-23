@@ -34,7 +34,7 @@ public class OrdersController : ControllerBase
     {
         _logger.LogInformation("REQUEST: Create order request received {request}", createOrderRequest);
 
-        var orderDTO = new CreateOrderDTO(createOrderRequest.ProductName, createOrderRequest.Quantity);
+        var orderDTO = new CreateOrderDto(createOrderRequest.ProductName, createOrderRequest.Quantity);
 
         _logger.LogInformation("INFO: Object mapped {object}", orderDTO);
 
@@ -59,7 +59,7 @@ public class OrdersController : ControllerBase
     {
         _logger.LogInformation("REQUEST: Get order by id request received {request}", getOrderByIdRequest);
 
-        var getOrderDTO = new GetOrderByIdDTO(getOrderByIdRequest.OrderId);
+        var getOrderDTO = new GetOrderByIdDto(getOrderByIdRequest.OrderId);
 
         _logger.LogInformation("INFO: Object mapped {object}", getOrderDTO);
 
@@ -98,7 +98,7 @@ public class OrdersController : ControllerBase
     {
         _logger.LogInformation("REQUEST: Update order by id request received {request}", updateOrderStatusByIdRequest);
 
-        var request = new UpdateOrderStatusByIdDTO(updateOrderStatusByIdRequest.OrderId);
+        var request = new UpdateOrderStatusByIdDto(updateOrderStatusByIdRequest.OrderId);
 
         _logger.LogInformation("INFO: Object mapped {object}", request);
 

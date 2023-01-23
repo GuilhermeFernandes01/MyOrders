@@ -27,15 +27,15 @@ namespace MyOrders.Application.UseCases.Orders.UpdateById
             _logger = logger;
         }
 
-		public async Task<UpdateOrderByIdResponse?> Execute(UpdateOrderStatusByIdDTO updateOrderStatusByIdDTO, CancellationToken cancellationToken)
+		public async Task<UpdateOrderByIdResponse?> Execute(UpdateOrderStatusByIdDto UpdateOrderStatusByIdDto, CancellationToken cancellationToken)
 		{
             var orderExists = await _orderRepository
-                .CheckOrderIdExists(updateOrderStatusByIdDTO.OrderId, cancellationToken)
+                .CheckOrderIdExists(UpdateOrderStatusByIdDto.OrderId, cancellationToken)
                 .ConfigureAwait(false);
 
             ValidateRequest(orderExists);
 
-            var orderToBeSent = new OrderPaymentConfirmedMessage(updateOrderStatusByIdDTO.OrderId);
+            var orderToBeSent = new OrderPaymentConfirmedMessage(UpdateOrderStatusByIdDto.OrderId);
 
             await _bus.Publish(orderToBeSent, cancellationToken);
 
