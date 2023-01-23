@@ -9,54 +9,52 @@ using MyOrders.Domain.Contracts;
 using MyOrders.Application.DTOs.Orders;
 using MyOrders.Application.Outputs.Orders;
 
-namespace MyOrders.Application.UseCases.Orders.UpdateById
+namespace MyOrders.Application.UseCases.Orders.UpdateById;
+
+public class UpdateOrderByIdUseCase : IUpdateOrderByIdUseCase
 {
-	public class UpdateOrderByIdUseCase : IUpdateOrderByIdUseCase
+    private readonly IOrderRepository _orderRepository;
+    private readonly IBus _bus;
+    private readonly ILogger<UpdateOrderByIdUseCase> _logger;
+
+    public UpdateOrderByIdUseCase(
+        IOrderRepository orderRepository,
+        ILogger<UpdateOrderByIdUseCase> logger,
+        IBus bus)
+		{
+        _orderRepository = orderRepository;
+        _bus = bus;
+        _logger = logger;
+    }
+
+	public async Task<UpdateOrderByIdResponse?> Execute(UpdateOrderStatusByIdDto UpdateOrderStatusByIdDto, CancellationToken cancellationToken)
+	{
+        var orderExists = await _orderRepository
+            .CheckOrderIdExists(UpdateOrderStatusByIdDto.OrderId, cancellationToken)
+            .ConfigureAwait(false);
+        
+        _logger.LogInformation("DB_RESPONSE: {orderExists}", orderExists);
+
+        ValidateRequest(orderExists);
+
+        var orderToBeSent = new OrderPaymentConfirmedMessage(UpdateOrderStatusByIdDto.OrderId);
+
+        await _bus.Publish(orderToBeSent, cancellationToken).ConfigureAwait(false);
+        
+        _logger.LogInformation("INFO: Message published {orderToBeSent}", orderToBeSent);
+
+        return null;
+    }
+
+    private void ValidateRequest(bool orderExists)
     {
-        private readonly IOrderRepository _orderRepository;
-        private readonly IBus _bus;
-        private readonly ILogger<UpdateOrderByIdUseCase> _logger;
-
-        public UpdateOrderByIdUseCase(
-            IOrderRepository orderRepository,
-            ILogger<UpdateOrderByIdUseCase> logger,
-            IBus bus)
-		{
-            _orderRepository = orderRepository;
-            _bus = bus;
-            _logger = logger;
-        }
-
-		public async Task<UpdateOrderByIdResponse?> Execute(UpdateOrderStatusByIdDto UpdateOrderStatusByIdDto, CancellationToken cancellationToken)
-		{
-            var orderExists = await _orderRepository
-                .CheckOrderIdExists(UpdateOrderStatusByIdDto.OrderId, cancellationToken)
-                .ConfigureAwait(false);
-            
-            _logger.LogInformation("DB_RESPONSE: {orderExists}", orderExists);
-
-            ValidateRequest(orderExists);
-
-            var orderToBeSent = new OrderPaymentConfirmedMessage(UpdateOrderStatusByIdDto.OrderId);
-
-            await _bus.Publish(orderToBeSent, cancellationToken).ConfigureAwait(false);
-            
-            _logger.LogInformation("INFO: Message published {orderToBeSent}", orderToBeSent);
-
-            return null;
-        }
-
-        private void ValidateRequest(bool orderExists)
+        if (!orderExists)
         {
-            if (!orderExists)
-            {
-                var orderNotFoundMessage = "Order not found";
+            var orderNotFoundMessage = "Order not found";
 
-                _logger.LogError("ERROR: {response}", orderNotFoundMessage);
+            _logger.LogError("ERROR: {response}", orderNotFoundMessage);
 
-                throw new NotFoundException(orderNotFoundMessage);
-            }
+            throw new NotFoundException(orderNotFoundMessage);
         }
-	}
+    }
 }
-

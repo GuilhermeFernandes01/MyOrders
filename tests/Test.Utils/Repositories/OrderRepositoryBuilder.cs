@@ -1,6 +1,8 @@
-﻿using Moq;
+﻿using MassTransit.Transports;
+using Moq;
 using MyOrders.Domain.Models;
 using MyOrders.Domain.Persistence;
+using Test.Utils.Models;
 
 namespace Test.Utils.Repositories;
 
@@ -29,6 +31,14 @@ public class OrderRepositoryBuilder
 
 		return this;
 	}
+
+	public OrderRepositoryBuilder GetOrderByIdAsync(int orderId, CancellationToken cancellationToken)
+	{
+        _orderRepository.Setup(i => i.GetOrderByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(OrderBuilder.Build());
+
+        return this;
+    }
 
     public IOrderRepository Build()
 	{

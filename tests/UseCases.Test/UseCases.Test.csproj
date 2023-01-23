@@ -31,10 +31,16 @@
     <None Remove="Orders\" />
     <None Remove="Orders\Create\" />
     <None Remove="FluentAssertions" />
+    <None Remove="Orders\GetAll\" />
+    <None Remove="Orders\GetById\" />
+    <None Remove="Orders\UpdateById\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Orders\" />
     <Folder Include="Orders\Create\" />
+    <Folder Include="Orders\GetAll\" />
+    <Folder Include="Orders\GetById\" />
+    <Folder Include="Orders\UpdateById\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Test.Utils\Test.Utils.csproj" />
