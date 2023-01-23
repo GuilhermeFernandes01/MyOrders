@@ -8,6 +8,7 @@ using MyOrders.Application.UseCases.Orders.Create;
 using MyOrders.Application.UseCases.Orders.GetById;
 using MyOrders.Application.UseCases.Orders.GetAll;
 using MyOrders.Application.UseCases.Orders.UpdateById;
+using System.Text.Json;
 
 namespace MyOrders.Api.Controllers;
 
@@ -32,17 +33,17 @@ public class OrdersController : ControllerBase
         [FromBody] CreateOrderRequest createOrderRequest,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("REQUEST: Create order request received {request}", createOrderRequest);
+        _logger.LogInformation("REQUEST: Create order request received {request}", JsonSerializer.Serialize(createOrderRequest));
 
         var orderDTO = new CreateOrderDto(createOrderRequest.ProductName, createOrderRequest.Quantity);
 
-        _logger.LogInformation("INFO: Object mapped {object}", orderDTO);
+        _logger.LogInformation("INFO: Object mapped {object}", JsonSerializer.Serialize(orderDTO));
 
         var orderCreated = await useCase.Execute(orderDTO, cancellationToken).ConfigureAwait(false);
 
         var responseUri = new Uri($"{Request.Scheme}://{Request.Host}{Request.PathBase}/Orders/{orderCreated.OrderId}/");
 
-        _logger.LogInformation("RESPONSE: Order created successfully {response}", responseUri);
+        _logger.LogInformation("RESPONSE: Order created successfully {response}", JsonSerializer.Serialize(responseUri));
 
         return Created(responseUri, default);
     }
@@ -57,15 +58,15 @@ public class OrdersController : ControllerBase
         [FromRoute] GetOrderByIdRequest getOrderByIdRequest,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("REQUEST: Get order by id request received {request}", getOrderByIdRequest);
+        _logger.LogInformation("REQUEST: Get order by id request received {request}", JsonSerializer.Serialize(getOrderByIdRequest));
 
         var getOrderDTO = new GetOrderByIdDto(getOrderByIdRequest.OrderId);
 
-        _logger.LogInformation("INFO: Object mapped {object}", getOrderDTO);
+        _logger.LogInformation("INFO: Object mapped {object}", JsonSerializer.Serialize(getOrderDTO));
 
         var response = await useCase.Execute(getOrderDTO, cancellationToken).ConfigureAwait(false);
 
-        _logger.LogInformation("RESPONSE: Order returned successfully {response}", response);
+        _logger.LogInformation("RESPONSE: Order returned successfully {response}", JsonSerializer.Serialize(response));
 
         return Ok(response);
     }
@@ -82,7 +83,7 @@ public class OrdersController : ControllerBase
 
         var response = await useCase.Execute(cancellationToken).ConfigureAwait(false);
 
-        _logger.LogInformation("RESPONSE: Orders returned successfully {response}", response);
+        _logger.LogInformation("RESPONSE: Orders returned successfully {response}", JsonSerializer.Serialize(response));
 
         return Ok(response);
     }
@@ -96,11 +97,11 @@ public class OrdersController : ControllerBase
         [FromRoute] UpdateOrderStatusByIdRequest updateOrderStatusByIdRequest,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("REQUEST: Update order by id request received {request}", updateOrderStatusByIdRequest);
+        _logger.LogInformation("REQUEST: Update order by id request received {request}", JsonSerializer.Serialize(updateOrderStatusByIdRequest));
 
         var request = new UpdateOrderStatusByIdDto(updateOrderStatusByIdRequest.OrderId);
 
-        _logger.LogInformation("INFO: Object mapped {object}", request);
+        _logger.LogInformation("INFO: Object mapped {object}", JsonSerializer.Serialize(request));
 
         await useCase.Execute(request, cancellationToken).ConfigureAwait(false);
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using MyOrders.Application.Outputs.Orders;
 using MyOrders.Domain.Persistence;
 
@@ -19,7 +20,7 @@ public class GetOrdersUseCase : IGetOrdersUseCase
     {
         var orders = await _orderRepository.GetOrdersAsync(cancellationToken).ConfigureAwait(false);
         
-        _logger.LogInformation("DB_RESPONSE: {orders}", orders);
+        _logger.LogInformation("DB_RESPONSE: {orders}", JsonSerializer.Serialize(orders));
         
         var response = new GetAllOrdersResponse(orders.Count(), orders);
 

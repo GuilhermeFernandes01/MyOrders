@@ -4,6 +4,7 @@ using MyOrders.Application.Outputs.Orders;
 using MyOrders.Domain.Exceptions;
 using MyOrders.Domain.Persistence;
 using MyOrders.Domain.Models;
+using System.Text.Json;
 
 namespace MyOrders.Application.UseCases.Orders.Create
 {
@@ -32,7 +33,7 @@ namespace MyOrders.Application.UseCases.Orders.Create
 
 			await _orderRepository.AddAsync(order, cancellationToken).ConfigureAwait(false);
 
-			_logger.LogInformation("INFO: Order created sucessfully {order}", order);
+			_logger.LogInformation("INFO: Order created sucessfully {order}", JsonSerializer.Serialize(order));
 
 			var response = new CreateOrderResponse(order.OrderId);
 

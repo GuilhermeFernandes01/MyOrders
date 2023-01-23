@@ -8,6 +8,7 @@ using MyOrders.Domain.Persistence;
 using MyOrders.Domain.Contracts;
 using MyOrders.Application.DTOs.Orders;
 using MyOrders.Application.Outputs.Orders;
+using System.Text.Json;
 
 namespace MyOrders.Application.UseCases.Orders.UpdateById;
 
@@ -33,7 +34,7 @@ public class UpdateOrderByIdUseCase : IUpdateOrderByIdUseCase
             .CheckOrderIdExists(UpdateOrderStatusByIdDto.OrderId, cancellationToken)
             .ConfigureAwait(false);
         
-        _logger.LogInformation("DB_RESPONSE: {orderExists}", orderExists);
+        _logger.LogInformation("DB_RESPONSE: {orderExists}", JsonSerializer.Serialize(orderExists));
 
         ValidateRequest(orderExists);
 
@@ -41,7 +42,7 @@ public class UpdateOrderByIdUseCase : IUpdateOrderByIdUseCase
 
         await _bus.Publish(orderToBeSent, cancellationToken).ConfigureAwait(false);
         
-        _logger.LogInformation("INFO: Message published {orderToBeSent}", orderToBeSent);
+        _logger.LogInformation("INFO: Message published {orderToBeSent}", JsonSerializer.Serialize(orderToBeSent));
 
         return null;
     }
