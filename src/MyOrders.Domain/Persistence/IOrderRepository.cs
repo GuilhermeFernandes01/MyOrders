@@ -1,19 +1,18 @@
 ﻿using MyOrders.Domain.Models;
 
-namespace MyOrders.Domain.Persistence
+namespace MyOrders.Domain.Persistence;
+
+public interface IOrderRepository
 {
-    public interface IOrderRepository
-    {
-        Task AddAsync(Order order, CancellationToken cancellationToken);
+    Task AddAsync(Order order, CancellationToken cancellationToken);
 
-        Task<Order?> GetOrderByIdAsync(int orderId, CancellationToken cancellationToken);
+    Task<Order?> GetOrderByIdAsync(int orderId, CancellationToken cancellationToken);
 
-        Task<IEnumerable<Order>> GetOrdersAsync(CancellationToken cancellationToken);
+    Task<IEnumerable<Order>> GetOrdersAsync(CancellationToken cancellationToken);
 
-        Task<bool> CheckOrderIdExists(int orderId, CancellationToken cancellationToken);
+    Task<bool> CheckOrderIdExists(int orderId, CancellationToken cancellationToken);
 
-        Task<Order?> MarkOrderAsPaidAsync(int orderId);
+    Task<Order?> MarkOrderAsPaidAsync(int orderId);
 
-        Task<Order?> MarkOrderAsShippedAsync(int orderId);
-    }
+    Task<Order?> MarkOrderAsShippedAsync(int orderId);
 }

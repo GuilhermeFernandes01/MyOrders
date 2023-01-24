@@ -1,12 +1,11 @@
-namespace MyOrders.Domain.Contracts
-{
-    public class ProcessOrderMessage
-    {
-        public int OrderId { get; }
+namespace MyOrders.Domain.Contracts;
 
-        public ProcessOrderMessage(int orderId)
-        {
-            OrderId = orderId;
-        }
+public class ProcessOrderMessage
+{
+    public int OrderId { get; }
+
+    public ProcessOrderMessage(int orderId)
+    {
+        OrderId = orderId;
     }
 }

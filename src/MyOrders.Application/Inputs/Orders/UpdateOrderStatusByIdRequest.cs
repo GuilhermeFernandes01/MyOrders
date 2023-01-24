@@ -1,7 +1,6 @@
-﻿namespace MyOrders.Application.Inputs.Orders
+﻿namespace MyOrders.Application.Inputs.Orders;
+
+public class UpdateOrderStatusByIdRequest
 {
-	public class UpdateOrderStatusByIdRequest
-	{
-        public int OrderId { get; set; }
-    }
+    public int OrderId { get; set; }
 }

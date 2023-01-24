@@ -8,7 +8,9 @@ public class CreateOrderDto
 
     public CreateOrderDto(string productName, int quantity)
 	{
-        ProductName = !String.IsNullOrWhiteSpace(productName) ? productName : throw new ArgumentException();
+        ProductName = !String.IsNullOrWhiteSpace(productName)
+            ? productName
+            : throw new ArgumentNullException();
         Quantity = quantity > 0 ? quantity : throw new ArgumentOutOfRangeException();
 	}
 }

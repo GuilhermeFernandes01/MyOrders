@@ -58,7 +58,7 @@ public class OrdersControllerTest
 
         // Assert
         response.Should().BeOfType<CreatedResult>();
-        useCase.Verify(x => x.Execute(It.IsAny<CreateOrderDto>(), It.IsAny<CancellationToken>()), Times.Once);
+        useCase.Verify();
         useCase.VerifyNoOtherCalls();
     }
 
@@ -91,7 +91,7 @@ public class OrdersControllerTest
 
         // Assert
         response.Should().BeOfType<OkObjectResult>();
-        useCase.Verify(x => x.Execute(It.IsAny<GetOrderByIdDto>(), It.IsAny<CancellationToken>()), Times.Once);
+        useCase.Verify();
         useCase.VerifyNoOtherCalls();
     }
 
@@ -116,7 +116,7 @@ public class OrdersControllerTest
 
         // Assert
         response.Should().BeOfType<OkObjectResult>();
-        useCase.Verify(x => x.Execute(It.IsAny<CancellationToken>()), Times.Once);
+        useCase.Verify();
         useCase.VerifyNoOtherCalls();
     }
 
@@ -146,7 +146,7 @@ public class OrdersControllerTest
 
         // Assert
         response.Should().BeOfType<AcceptedResult>();
-        useCase.Verify(x => x.Execute(It.IsAny<UpdateOrderStatusByIdDto>(), It.IsAny<CancellationToken>()), Times.Once);
+        useCase.Verify();
         useCase.VerifyNoOtherCalls();
     }
 }

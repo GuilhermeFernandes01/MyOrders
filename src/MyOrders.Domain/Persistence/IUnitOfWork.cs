@@ -1,7 +1,6 @@
-﻿namespace MyOrders.Domain.Persistence
+﻿namespace MyOrders.Domain.Persistence;
+
+public interface IUnitOfWork
 {
-    public interface IUnitOfWork
-    {
-        Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken);
-    }
+    Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken);
 }

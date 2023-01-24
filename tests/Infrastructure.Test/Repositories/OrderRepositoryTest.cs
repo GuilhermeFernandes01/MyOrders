@@ -47,7 +47,7 @@ public class OrderRepositoryTest
 
         // Assert
         response.Should().BeOfType<Order>();
-        response!.OrderId.Should().Be(1);
+        response.OrderId.Should().Be(1);
     }
 
     [Fact(DisplayName = "GIVEN a valid repository WHEN GetOrdersAsync is called THEN it should return orders")]
@@ -91,8 +91,8 @@ public class OrderRepositoryTest
 
         // Assert
         response.Should().BeOfType<Order>();
-        response!.Paid.Should().BeTrue();
-        response!.Shipped.Should().BeFalse();
+        response.Paid.Should().BeTrue();
+        response.Shipped.Should().BeFalse();
     }
 
     [Fact(DisplayName = "GIVEN a valid repository WHEN MarkOrderAsPaidAsync is called and order does not exist THEN it should return null")]
@@ -119,8 +119,8 @@ public class OrderRepositoryTest
 
         // Assert
         response.Should().BeOfType<Order>();
-        response!.Paid.Should().BeFalse();
-        response!.Shipped.Should().BeTrue();
+        response.Paid.Should().BeFalse();
+        response.Shipped.Should().BeTrue();
     }
 
     [Fact(DisplayName = "GIVEN a valid repository WHEN MarkOrderAsShippedAsync is called and order does not exist THEN it should return null")]

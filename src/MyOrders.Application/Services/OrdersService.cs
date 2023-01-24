@@ -1,29 +1,28 @@
 ﻿using MyOrders.Domain.Persistence;
 using MyOrders.Domain.Models;
 
-namespace MyOrders.Application.Services
+namespace MyOrders.Application.Services;
+
+public class OrdersService : IOrdersService
 {
-    public class OrdersService : IOrdersService
+    private readonly IOrderRepository _orderRepository;
+
+    public OrdersService(IOrderRepository orderRepository)
     {
-        private readonly IOrderRepository _orderRepository;
+        _orderRepository = orderRepository;
+    }
 
-        public OrdersService(IOrderRepository orderRepository)
-        {
-            _orderRepository = orderRepository;
-        }
+    public async Task<Order?> MarkOrderAsPaidAsync(int orderId)
+    {
+        return await _orderRepository
+            .MarkOrderAsPaidAsync(orderId)
+            .ConfigureAwait(false);
+    }
 
-        public async Task<Order?> MarkOrderAsPaidAsync(int orderId)
-        {
-            return await _orderRepository
-                .MarkOrderAsPaidAsync(orderId)
-                .ConfigureAwait(false);
-        }
-
-        public async Task<Order?> MarkOrderAsShippedAsync(int orderId)
-        {
-            return await _orderRepository
-                .MarkOrderAsShippedAsync(orderId)
-                .ConfigureAwait(false);
-        }
+    public async Task<Order?> MarkOrderAsShippedAsync(int orderId)
+    {
+        return await _orderRepository
+            .MarkOrderAsShippedAsync(orderId)
+            .ConfigureAwait(false);
     }
 }

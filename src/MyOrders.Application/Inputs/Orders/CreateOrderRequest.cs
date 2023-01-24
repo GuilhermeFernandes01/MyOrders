@@ -1,9 +1,8 @@
-﻿namespace MyOrders.Application.Inputs.Orders
-{
-	public class CreateOrderRequest
-	{
-		public string ProductName { get; set; }
+﻿namespace MyOrders.Application.Inputs.Orders;
 
-		public int Quantity { get; set; }
-	}
+public class CreateOrderRequest
+{
+	public string ProductName { get; set; }
+
+	public int Quantity { get; set; }
 }

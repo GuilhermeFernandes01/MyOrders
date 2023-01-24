@@ -40,8 +40,7 @@ public static class DependenciesInjection
         this IServiceCollection services,
         IConfiguration configuration,
         Action<IBusRegistrationConfigurator>? busConfig = null,
-        Action<IRabbitMqBusFactoryConfigurator>? rabbitConfig = null
-    )
+        Action<IRabbitMqBusFactoryConfigurator>? rabbitConfig = null)
     {
         var rabbitHost = configuration.GetSection("RabbitMqSettings:Host").Value;
         var rabbitUsername = configuration.GetSection("RabbitMqSettings:Username").Value;
@@ -70,5 +69,4 @@ public static class DependenciesInjection
 
         return services;
     }
-	}
-
+}

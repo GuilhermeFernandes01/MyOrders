@@ -2,6 +2,8 @@ using MyOrders.Api.Filters;
 using MyOrders.Application;
 using MyOrders.Domain.Contracts;
 
+namespace MyOrders.Api;
+
 internal class Program
 {
     private static void Main(string[] args)
